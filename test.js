@@ -36,8 +36,8 @@ describe('dbInterface', function() {
    */
   it('can query data by director', function(done) {
         dbInterface.byDirector(db, 'Irvin Kershner', function (error, docs) {
-            console.log('1+++++++++++++++' + docs);
-            console.log('2///////////////' + error);
+            console.log('1+++++++++++++++' + docs[0].title);
+            //console.log('2///////////////' + error);
       assert.ifError(error);
       assert.ok(Array.isArray(docs));
       assert.equal(docs.length, 1);
@@ -86,7 +86,7 @@ describe('dbInterface', function() {
         if (error) {
           return done(error);
         }
-                console.log('4**** removing and adding stuff*****');
+        console.log('4**** removing and adding stuff*****');
         var fns = [];
         movies.movies.forEach(function(movie) {
                     fns.push(function (callback) {

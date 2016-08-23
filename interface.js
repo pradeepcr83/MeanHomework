@@ -20,24 +20,31 @@ This queries for documents where headers equals { From: ... }, i.e. contains no 
 db.messages.find( { 'headers.From': "reservations@marriott.com" }  )
 
 This only looks at the headers.From field, not affected by other fields contained in, or missing from, headers.*/
+var retDoc = [];
 exports.byDirector = function (db, director, callback) {
     // TODO: implement
     var query = { 'director': director };
+    
     console.log(query);
-    db.collection('movies').find(query).toArray(function (err, doc) {
+    var moviesByHim = db.collection('movies').find(query , (function (err, doc) {
+        doc.toArray(callback);
+        
+    }));
+    /*var moviesByHim = db.collection('movies').find(query).toArray(function (err, doc) {
+
         doc.forEach(function (d) {
             console.log("77777777777777");
             console.log(JSON.stringify(d));
+            retDoc.push(JSON.stringify(d));
+            console.log("8888888888" + retDoc);
+            //callback(null, retDoc);
         })
-    });
-    callback(null, []);
+    });*/
+    //callback(null, [moviesByHim]);
+    /*retDoc.forEach(function (dq) {
+        console.log("888888888888");
+        console.log(JSON.stringify(dq));        
+    })*/
+    //console.log("8888888888" + retDoc);
+    //callback(null, [retDoc]);
 };
-
-myfunc = function (doc){
-    console.log("77777777777777");
-    
-};
-myfunc2 = function (doc) {
-    console.log("77777777777777");
-    console.log(JSON.stringify(doc));
-}
